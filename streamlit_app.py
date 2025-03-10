@@ -6,33 +6,7 @@ import csv
 import random
 import numpy as np
 import time
-import base64
 
-
-# Specify the image file and its extension
-main_bg = "pexels-egos68-1906658.jpg"
-main_bg_ext = "jpg"
-
-# Encode the image to base64
-def get_base64_of_bin_file(bin_file):
-    with open(bin_file, "rb") as f:
-        return base64.b64encode(f.read()).decode()
-
-# Get the base64 of the image
-base64_image = get_base64_of_bin_file(main_bg)
-
-# Set the background image using the encoded base64 string
-st.markdown(
-    f"""
-    <style>
-    .stApp {{
-        background-image: url("data:image/{main_bg_ext};base64,{base64_image}");
-        background-size: cover;
-    }}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 
 st.title("My Expenses")
