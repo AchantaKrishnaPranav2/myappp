@@ -4,7 +4,6 @@ import datetime
 import re
 import csv
 import random
-import emoji
 import numpy as np
 import time
 import base64
@@ -51,20 +50,20 @@ def main():
     )
 
 
-    mylist = [
+    '''mylist = [
         emoji.emojize(":red_heart:"),
         emoji.emojize(":thumbs_up:"),
         emoji.emojize(":raised_hand:"),
         emoji.emojize(":angry_face:"),
     ]
-    k = random.choice(mylist)
+    k = random.choice(mylist)'''
     name = st.date_input("Enter the date")
     amount = st.text_input("Enter the Amount", "")
     if amount.isdigit():
         if st.button("Submit"):
             result = f"{name},{amount}"
 
-            st.success(result, icon=k)
+            st.success(result)
             with open(f"{status}_expenses.csv", "a", newline="") as file:
                 writer = csv.DictWriter(file, fieldnames=["date", "amount"])
                 writer.writerow({"date": name, "amount": amount})
