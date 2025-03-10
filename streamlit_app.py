@@ -24,13 +24,6 @@ def main():
     )
 
 
-    '''mylist = [
-        emoji.emojize(":red_heart:"),
-        emoji.emojize(":thumbs_up:"),
-        emoji.emojize(":raised_hand:"),
-        emoji.emojize(":angry_face:"),
-    ]
-    k = random.choice(mylist)'''
     name = st.date_input("Enter the date")
     amount = st.text_input("Enter the Amount", "")
     if amount.isdigit():
