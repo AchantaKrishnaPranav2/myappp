@@ -9,7 +9,7 @@ import time
 
 
 
-st.title("My  :blue[Expenses] :sunglasses:")
+st.title("My  :red[Expenses] :sunglasses:")
 st.sidebar.title( "About the project")
 st.sidebar.text("This project is about me making a\n log of all the expenses I make\n during a month.")
 
