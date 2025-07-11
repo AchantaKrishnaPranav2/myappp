@@ -1,25 +1,20 @@
-# 📦 Streamlit App Starter Kit 
-```
-⬆️ (Replace above with your app's name)
-```
+# My Expenses App
+This is an app which I use to keep a track of my expenses during the course of a month
 
-Description of the app ...
+This app allows users to log, visualize, and export their expenses, helping them understand and manage their monthly spending more effectively.
 
-## Demo App
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://app-starter-kit.streamlit.app/)
+## Features
 
-## GitHub Codespaces
+- Add expenses with category, amount, and date
+- View monthly totals automatically
+- Visual breakdown by category using pie and bar charts
+- Download expenses as a CSV file
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/app-starter-kit?quickstart=1)
+## How to run
+- You can directly run this on cloud using the url : https://my-expenses.streamlit.app/
 
-## Section Heading
 
-This is filler text, please replace this with text for this section.
 
-## Further Reading
 
-This is filler text, please replace this with a explanatory text about further relevant resources for this repo
-- Resource 1
-- Resource 2
-- Resource 3
+
