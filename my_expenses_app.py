@@ -10,7 +10,7 @@ st.title("My :red[Expenses] :sunglasses:")
 # Sidebar
 st.sidebar.title("About the project")
 st.sidebar.text("This project is about me making a\nlog of all the expenses I make\nduring a month.")
-st.sidebar.markdown("[Click here for the code](https://fantastic-space-happiness-97q955pgvqxxfx945.github.dev/)")
+st.sidebar.markdown("[Click here for the code](https://github.com/AchantaKrishnaPranav2/myappp/)")
 
 # Initialize session state for expenses
 if "expenses" not in st.session_state:
