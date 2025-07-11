@@ -3,3 +3,4 @@ streamlit
 gspread 
 numpy
 oauth2client
+plotly
