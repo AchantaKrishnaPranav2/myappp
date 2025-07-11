@@ -35,7 +35,7 @@ def main():
 
     # Show all saved expenses
     if st.session_state["expenses"]:
-        st.subheader("📊 Expense History")
+        st.subheader(" Expense History")
         df = pd.DataFrame(st.session_state["expenses"])
         df['date'] = pd.to_datetime(df['date'])
 
@@ -43,7 +43,7 @@ def main():
         st.dataframe(df)
 
         # Total amount by month
-        st.subheader("📅 Monthly Totals")
+        st.subheader(" Monthly Totals")
         monthly = df.copy()
         monthly['month'] = monthly['date'].dt.to_period('M')
         month_totals = monthly.groupby('month')['amount'].sum().reset_index()
@@ -51,17 +51,17 @@ def main():
         st.table(month_totals)
 
         # Pie chart: Category breakdown
-        st.subheader("🍕 Category Breakdown")
+        st.subheader(" Category Breakdown")
         pie_chart = px.pie(df, names='category', values='amount', title='Expenses by Category')
         st.plotly_chart(pie_chart)
 
         # Bar chart: Category totals
-        st.subheader("📊 Bar Chart of Spending by Category")
+        st.subheader(" Bar Chart of Spending by Category")
         bar_chart = px.bar(df.groupby('category')['amount'].sum().reset_index(), x='category', y='amount')
         st.plotly_chart(bar_chart)
 
         # CSV Export
-        st.subheader("⬇️ Export Your Expenses")
+        st.subheader("⬇ Export Your Expenses")
         csv = df.to_csv(index=False).encode('utf-8')
         st.download_button(
             label="Download CSV",
