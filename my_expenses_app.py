@@ -1,7 +1,8 @@
-
-
 import streamlit as st
 import datetime
+import pandas as pd
+import plotly.express as px
+from io import StringIO
 
 # Title
 st.title("My :red[Expenses] :sunglasses:")
@@ -16,38 +17,58 @@ if "expenses" not in st.session_state:
     st.session_state["expenses"] = []
 
 def main():
-    # Expense category selection
+    # Input form
     status = st.radio("Select Reason:", ("Canteen", "Mess", "Home", "Travel", "Utility"))
+    date = st.date_input("Enter the date", datetime.date.today())
+    amount = st.text_input("Enter the Amount (in ₹)", "")
 
-    # Date input
-    date = st.date_input("Enter the date")
-
-    # Amount input
-    amount = st.text_input("Enter the Amount", "")
-
-    # Check for valid input
     if amount.strip().isdigit():
         if st.button("Submit"):
-            expense_entry = {"date": str(date), "amount": amount, "category": status}
-            
-            # Store in session state
-            st.session_state["expenses"].append(expense_entry)
+            st.session_state["expenses"].append({
+                "date": str(date),
+                "amount": int(amount),
+                "category": status
+            })
             st.success("Added successfully!")
-
-    else:
+    elif amount:
         st.warning("Please enter a valid numeric amount.")
 
     # Show all saved expenses
     if st.session_state["expenses"]:
-        st.subheader("Expense History")
-        for expense in st.session_state["expenses"]:
-            st.write(f"📅 {expense['date']} | 💰 ₹{expense['amount']} | 🏷️ {expense['category']}")
+        st.subheader("📊 Expense History")
+        df = pd.DataFrame(st.session_state["expenses"])
+        df['date'] = pd.to_datetime(df['date'])
+
+        # Show raw table
+        st.dataframe(df)
+
+        # Total amount by month
+        st.subheader("📅 Monthly Totals")
+        monthly = df.copy()
+        monthly['month'] = monthly['date'].dt.to_period('M')
+        month_totals = monthly.groupby('month')['amount'].sum().reset_index()
+        month_totals['month'] = month_totals['month'].astype(str)
+        st.table(month_totals)
+
+        # Pie chart: Category breakdown
+        st.subheader("🍕 Category Breakdown")
+        pie_chart = px.pie(df, names='category', values='amount', title='Expenses by Category')
+        st.plotly_chart(pie_chart)
+
+        # Bar chart: Category totals
+        st.subheader("📊 Bar Chart of Spending by Category")
+        bar_chart = px.bar(df.groupby('category')['amount'].sum().reset_index(), x='category', y='amount')
+        st.plotly_chart(bar_chart)
+
+        # CSV Export
+        st.subheader("⬇️ Export Your Expenses")
+        csv = df.to_csv(index=False).encode('utf-8')
+        st.download_button(
+            label="Download CSV",
+            data=csv,
+            file_name='my_expenses.csv',
+            mime='text/csv',
+        )
 
 if __name__ == "__main__":
     main()
-
-            
-        
-
-
-
